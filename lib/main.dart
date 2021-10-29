@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:fuel_calculator/home.dart';
+import 'package:fuel_calculator/ui/screens/home.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Sizer(
       builder: (context, orientation, deviceType) {
-        return const MaterialApp(
+        return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           home: Home(),
         );

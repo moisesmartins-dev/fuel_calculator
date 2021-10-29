@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:fuel_calculator/widget/text_field.dart';
-import 'package:fuel_calculator/widget/text_field_money.dart';
+import 'package:fuel_calculator/controller/home_controller.dart';
+import 'package:fuel_calculator/ui/widget/radio_button.dart';
+import 'package:fuel_calculator/ui/widget/text_field.dart';
+import 'package:fuel_calculator/ui/widget/text_field_money.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:sizer/sizer.dart';
+import 'package:get/get.dart';
 
 class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+  final HomeController _homeController = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +21,6 @@ class Home extends StatelessWidget {
             preferredSize: SizerUtil.deviceType == DeviceType.mobile
                 ? Size.fromHeight(7.h) // Widget for Mobile
                 : Size.fromHeight(7.h), // Widget for Tablet
-            // here the desired height
 
             child: AppBar(
               title: Text(
@@ -202,11 +203,30 @@ class Home extends StatelessWidget {
                                 )
                               ],
                             ),
+                            SizedBox(
+                              height: 1.h,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                RadioButton(value: 1, valuegroup: 1),
+                                Text("Sim"),
+                                RadioButton(value: 2, valuegroup: 2),
+                                Text("Não")
+                              ],
+                            ),
+                            // Row(
+                            //   // mainAxisAlignment: MainAxisAlignment.center,
+                            //   children: [
+                            //     RadioButton(btnIndex: 0, title: "sim"),
+                            //     RadioButton(btnIndex: 1, title: "não"),
+                            //   ],
+                            // ),
                           ],
                         ),
                       ),
                       SizedBox(
-                        height: 3.h,
+                        height: 1.h,
                       ),
                       Row(
                         children: [
@@ -240,7 +260,7 @@ class Home extends StatelessWidget {
                                 Container(
                                   child: Center(
                                     child: Text(
-                                      "R\$ 320",
+                                      "R\$ 300",
                                       style: TextStyle(
                                         fontFamily: "Amaranth",
                                         fontSize: 14.sp,
@@ -254,35 +274,40 @@ class Home extends StatelessWidget {
                             SizedBox(
                               height: 1.h,
                             ),
-                            Visibility(
-                              visible: true,
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(
-                                    "Valor total dividido entre amigos",
-                                    style: TextStyle(
-                                      fontFamily: "Amaranth",
-                                      fontSize: 14.sp,
-                                      fontStyle: FontStyle.normal,
-                                    ),
-                                  ),
-                                  Container(
-                                    child: Center(
-                                      child: Text(
-                                        "R\$ 320",
-                                        style: TextStyle(
-                                          fontFamily: "Amaranth",
-                                          fontSize: 14.sp,
-                                          fontStyle: FontStyle.normal,
-                                        ),
+                            Obx(() {
+                              return Visibility(
+                                //TODO implementar logica {se value for igual 1(sim) fica visivel }
+                                visible: _homeController.valueGroup.value == 2
+                                    ? false
+                                    : true,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Valor dividido para cada amigo",
+                                      style: TextStyle(
+                                        fontFamily: "Amaranth",
+                                        fontSize: 14.sp,
+                                        fontStyle: FontStyle.normal,
                                       ),
                                     ),
-                                  )
-                                ],
-                              ),
-                            )
+                                    Container(
+                                      child: Center(
+                                        child: Text(
+                                          "R\$ 60",
+                                          style: TextStyle(
+                                            fontFamily: "Amaranth",
+                                            fontSize: 14.sp,
+                                            fontStyle: FontStyle.normal,
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              );
+                            })
                           ],
                         ),
                       ),

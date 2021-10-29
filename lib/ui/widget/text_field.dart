@@ -1,26 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:sizer/sizer.dart';
 
-class TextFieldMoneyCustom extends StatelessWidget {
+class TextFieldCustom extends StatelessWidget {
   String labelTxt;
   String? prefixTxt;
   String? helperTxt;
   double width;
 
-  // TextInputFormatter? textInputFormatter = TextInputFormatter();
-
-  TextFieldMoneyCustom({
+  TextFieldCustom({
     required this.labelTxt,
     required this.width,
     this.prefixTxt,
     this.helperTxt,
   });
-
-  var moneyMaskFormatter = new MaskTextInputFormatter(
-      mask: '#,###.###.#', filter: {"#": RegExp(r'[0-9]')});
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +23,9 @@ class TextFieldMoneyCustom extends StatelessWidget {
       child: new TextFormField(
         // controller: textEditingController,
         keyboardType: TextInputType.number,
-        textDirection: TextDirection.rtl,
         inputFormatters: [
-          moneyMaskFormatter,
+          LengthLimitingTextInputFormatter(5),
+          FilteringTextInputFormatter.digitsOnly,
         ],
         decoration: InputDecoration(
           filled: true,
