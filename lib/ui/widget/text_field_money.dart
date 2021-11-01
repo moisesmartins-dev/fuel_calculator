@@ -9,10 +9,14 @@ class TextFieldMoneyCustom extends StatelessWidget {
   String? prefixTxt;
   String? helperTxt;
   double width;
+  ValueChanged? valueChanged;
+  TextEditingController textEditingController;
 
   TextFieldMoneyCustom({
+    required this.textEditingController,
     required this.labelTxt,
     required this.width,
+    this.valueChanged,
     this.prefixTxt,
     this.helperTxt,
   });
@@ -25,8 +29,9 @@ class TextFieldMoneyCustom extends StatelessWidget {
     return Container(
       width: width.h,
       child: new TextFormField(
-        // controller: textEditingController,
+        controller: textEditingController,
         keyboardType: TextInputType.number,
+        onChanged: valueChanged,
         textDirection: TextDirection.rtl,
         inputFormatters: [
           moneyMaskFormatter,

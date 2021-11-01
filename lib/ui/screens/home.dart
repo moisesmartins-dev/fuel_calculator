@@ -90,6 +90,8 @@ class Home extends StatelessWidget {
                             ],
                           ),
                           TextFieldCustom(
+                            textEditingController:
+                                _homeController.distanciaController,
                             labelTxt: "Quilômetro (km)",
                             width: 17,
                           )
@@ -120,8 +122,15 @@ class Home extends StatelessWidget {
                             ],
                           ),
                           TextFieldCustom(
+                            textEditingController:
+                                _homeController.consumoController,
                             labelTxt: "km/litro",
                             width: 14,
+                            valueChanged: (value) {
+                              _homeController.quantidadeController.text =
+                                  _homeController.calculoQuantidade();
+                              print(_homeController.quantidadeController.text);
+                            },
                           )
                         ],
                       ),
@@ -151,6 +160,9 @@ class Home extends StatelessWidget {
                             ],
                           ),
                           TextFieldCustom(
+                            // txtValue: _homeController.calculoQuantidade(),
+                            textEditingController:
+                                _homeController.quantidadeController,
                             labelTxt: "litros*",
                             width: 14,
                           ),
@@ -179,9 +191,26 @@ class Home extends StatelessWidget {
                             ],
                           ),
                           TextFieldMoneyCustom(
+                            textEditingController:
+                                _homeController.precoController,
                             prefixTxt: "R\$ ",
                             labelTxt: "Reais",
                             width: 14,
+                            valueChanged: (value) {
+                              if (_homeController
+                                  .precoController.text.isEmpty) {
+                                print('foi');
+                                _homeController.valorTotal?.value = "0";
+                                _homeController.valorTotalPessoa?.value = "0";
+                              }
+                              _homeController.valorTotal?.value =
+                                  _homeController.calculoCombustivel();
+                              if (_homeController.valueGroup.value == 1) {
+                                _homeController.valorTotalPessoa?.value =
+                                    _homeController
+                                        .calculoCombustivelPorPessoa();
+                              }
+                            },
                           )
                         ],
                       ),
@@ -204,24 +233,63 @@ class Home extends StatelessWidget {
                               ],
                             ),
                             SizedBox(
-                              height: 1.h,
+                              height: 2.h,
                             ),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 RadioButton(value: 1, valuegroup: 1),
-                                Text("Sim"),
+                                Text(
+                                  "Sim",
+                                  style: TextStyle(
+                                    fontFamily: "Amaranth",
+                                    fontSize: 14.sp,
+                                    fontStyle: FontStyle.normal,
+                                  ),
+                                ),
                                 RadioButton(value: 2, valuegroup: 2),
-                                Text("Não")
+                                Text(
+                                  "Não",
+                                  style: TextStyle(
+                                    fontFamily: "Amaranth",
+                                    fontSize: 14.sp,
+                                    fontStyle: FontStyle.normal,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: 10.w,
+                                ),
+                                Obx(
+                                  () {
+                                    return AnimatedOpacity(
+                                      duration:
+                                          const Duration(milliseconds: 300),
+                                      opacity:
+                                          _homeController.valueGroup.value == 2
+                                              ? 0.0
+                                              : 1.0,
+                                      child: TextFieldCustom(
+                                        textEditingController:
+                                            _homeController.pessoasController,
+                                        labelTxt: "Pessoas",
+                                        width: 10,
+                                        valueChanged: (value) {
+                                          if (_homeController
+                                              .precoController.text.isEmpty) {
+                                            _homeController
+                                                .valorTotalPessoa?.value = "0";
+                                          }
+                                          _homeController
+                                                  .valorTotalPessoa?.value =
+                                              _homeController
+                                                  .calculoCombustivelPorPessoa();
+                                        },
+                                      ),
+                                    );
+                                  },
+                                ),
                               ],
                             ),
-                            // Row(
-                            //   // mainAxisAlignment: MainAxisAlignment.center,
-                            //   children: [
-                            //     RadioButton(btnIndex: 0, title: "sim"),
-                            //     RadioButton(btnIndex: 1, title: "não"),
-                            //   ],
-                            // ),
                           ],
                         ),
                       ),
@@ -240,7 +308,7 @@ class Home extends StatelessWidget {
                         ],
                       ),
                       SizedBox(
-                        height: 3.h,
+                        height: 2.h,
                       ),
                       Container(
                         width: 90.w,
@@ -259,14 +327,16 @@ class Home extends StatelessWidget {
                                 ),
                                 Container(
                                   child: Center(
-                                    child: Text(
-                                      "R\$ 300",
-                                      style: TextStyle(
-                                        fontFamily: "Amaranth",
-                                        fontSize: 14.sp,
-                                        fontStyle: FontStyle.normal,
-                                      ),
-                                    ),
+                                    child: Obx(() {
+                                      return Text(
+                                        "R\$ ${_homeController.valorTotal}",
+                                        style: TextStyle(
+                                          fontFamily: "Amaranth",
+                                          fontSize: 14.sp,
+                                          fontStyle: FontStyle.normal,
+                                        ),
+                                      );
+                                    }),
                                   ),
                                 )
                               ],
@@ -275,11 +345,15 @@ class Home extends StatelessWidget {
                               height: 1.h,
                             ),
                             Obx(() {
-                              return Visibility(
+                              return AnimatedOpacity(
                                 //TODO implementar logica {se value for igual 1(sim) fica visivel }
-                                visible: _homeController.valueGroup.value == 2
-                                    ? false
-                                    : true,
+                                // visible: _homeController.valueGroup.value == 2
+                                //     ? false
+                                //     : true,
+                                duration: const Duration(milliseconds: 300),
+                                opacity: _homeController.valueGroup.value == 2
+                                    ? 0.0
+                                    : 1.0,
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -294,14 +368,16 @@ class Home extends StatelessWidget {
                                     ),
                                     Container(
                                       child: Center(
-                                        child: Text(
-                                          "R\$ 60",
-                                          style: TextStyle(
-                                            fontFamily: "Amaranth",
-                                            fontSize: 14.sp,
-                                            fontStyle: FontStyle.normal,
-                                          ),
-                                        ),
+                                        child: Obx(() {
+                                          return Text(
+                                            "R\$ ${_homeController.valorTotalPessoa}",
+                                            style: TextStyle(
+                                              fontFamily: "Amaranth",
+                                              fontSize: 14.sp,
+                                              fontStyle: FontStyle.normal,
+                                            ),
+                                          );
+                                        }),
                                       ),
                                     )
                                   ],

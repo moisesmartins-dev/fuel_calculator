@@ -7,11 +7,17 @@ class TextFieldCustom extends StatelessWidget {
   String labelTxt;
   String? prefixTxt;
   String? helperTxt;
+  String? txtValue;
   double width;
+  ValueChanged? valueChanged;
+  TextEditingController textEditingController;
 
   TextFieldCustom({
+    required this.textEditingController,
     required this.labelTxt,
     required this.width,
+    this.valueChanged,
+    this.txtValue,
     this.prefixTxt,
     this.helperTxt,
   });
@@ -21,11 +27,15 @@ class TextFieldCustom extends StatelessWidget {
     return Container(
       width: width.h,
       child: new TextFormField(
-        // controller: textEditingController,
+        initialValue: txtValue,
+        controller: textEditingController,
         keyboardType: TextInputType.number,
+        textInputAction: TextInputAction.next,
+        onChanged: valueChanged,
         inputFormatters: [
           LengthLimitingTextInputFormatter(5),
-          FilteringTextInputFormatter.digitsOnly,
+          FilteringTextInputFormatter.allow(RegExp('[0-9.]+')),
+          // FilteringTextInputFormatter.digitsOnly,
         ],
         decoration: InputDecoration(
           filled: true,
