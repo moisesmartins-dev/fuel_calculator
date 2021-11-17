@@ -5,9 +5,10 @@ import 'package:fuel_calculator/controller/home_controller.dart';
 import 'package:fuel_calculator/ui/widget/radio_button.dart';
 import 'package:fuel_calculator/ui/widget/text_field.dart';
 import 'package:fuel_calculator/ui/widget/text_field_money.dart';
+import 'package:fuel_calculator/ui/widget/texto.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:sizer/sizer.dart';
-import 'package:get/get.dart';
 
 class Home extends StatelessWidget {
   final HomeController _homeController = Get.put(HomeController());
@@ -20,22 +21,30 @@ class Home extends StatelessWidget {
           appBar: PreferredSize(
             preferredSize: SizerUtil.deviceType == DeviceType.mobile
                 ? Size.fromHeight(7.h) // Widget for Mobile
-                : Size.fromHeight(7.h), // Widget for Tablet
+                : Size.fromHeight(7.h),
+            // Widget for Tablet
 
             child: AppBar(
-              title: Text(
-                "Calculadora de Combustível",
-                style: GoogleFonts.amaranth(
-                  color: Colors.black,
-                  fontSize: 15.sp,
-                  fontWeight: FontWeight.w400,
-                ),
+              title: Texto(
+                text: "Calculadora de Combustível",
+                txtSize: 15,
+                fontWeight: FontWeight.w400,
               ),
+              actions: [
+                IconButton(
+                  onPressed: () => _homeController.limparValores(),
+                  icon: Icon(
+                    FontAwesomeIcons.undoAlt,
+                    color: Colors.black,
+                  ),
+                )
+              ],
               centerTitle: true,
               backgroundColor: Colors.amber,
               systemOverlayStyle: SystemUiOverlayStyle(
-                  statusBarColor: Colors.transparent,
-                  statusBarIconBrightness: Brightness.dark),
+                statusBarColor: Colors.transparent,
+                statusBarIconBrightness: Brightness.dark,
+              ),
             ),
           ),
           backgroundColor: Colors.amberAccent,
@@ -60,12 +69,10 @@ class Home extends StatelessWidget {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(top: 10, bottom: 25),
-                            child: Text(
-                              "Dados iniciais",
-                              style: GoogleFonts.amaranth(
-                                fontSize: 20.sp,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            child: Texto(
+                              text: "Dados iniciais",
+                              txtSize: 20,
+                              fontWeight: FontWeight.bold,
                             ),
                           )
                         ],
@@ -79,14 +86,11 @@ class Home extends StatelessWidget {
                               SizedBox(
                                 width: 5.w,
                               ),
-                              Text(
-                                "Distância",
-                                style: TextStyle(
-                                  fontFamily: "Amaranth",
-                                  fontSize: 14.sp,
-                                  fontStyle: FontStyle.normal,
-                                ),
-                              ),
+                              Texto(
+                                text: "Distância",
+                                txtSize: 14,
+                                fontWeight: FontWeight.normal,
+                              )
                             ],
                           ),
                           TextFieldCustom(
@@ -109,15 +113,12 @@ class Home extends StatelessWidget {
                               SizedBox(
                                 width: 5.w,
                               ),
-                              Text(
-                                SizerUtil.deviceType == DeviceType.mobile
+                              Texto(
+                                text: SizerUtil.deviceType == DeviceType.mobile
                                     ? "Cons. de combustível"
                                     : "Consumo de combustível",
-                                style: TextStyle(
-                                  fontFamily: "Amaranth",
-                                  fontSize: 14.sp,
-                                  fontStyle: FontStyle.normal,
-                                ),
+                                txtSize: 14,
+                                fontWeight: FontWeight.normal,
                               ),
                             ],
                           ),
@@ -147,16 +148,13 @@ class Home extends StatelessWidget {
                               SizedBox(
                                 width: 5.w,
                               ),
-                              Text(
-                                SizerUtil.deviceType == DeviceType.mobile
+                              Texto(
+                                text: SizerUtil.deviceType == DeviceType.mobile
                                     ? "Qtd de combustível"
                                     : "Quantidade de combustível",
-                                style: TextStyle(
-                                  fontFamily: "Amaranth",
-                                  fontSize: 14.sp,
-                                  fontStyle: FontStyle.normal,
-                                ),
-                              ),
+                                txtSize: 14,
+                                fontWeight: FontWeight.normal,
+                              )
                             ],
                           ),
                           TextFieldCustom(
@@ -180,13 +178,10 @@ class Home extends StatelessWidget {
                               SizedBox(
                                 width: 5.w,
                               ),
-                              Text(
-                                "Preço do combustível",
-                                style: TextStyle(
-                                  fontFamily: "Amaranth",
-                                  fontSize: 14.sp,
-                                  fontStyle: FontStyle.normal,
-                                ),
+                              Texto(
+                                text: "Preço do combustível",
+                                txtSize: 14,
+                                fontWeight: FontWeight.normal,
                               ),
                             ],
                           ),
@@ -222,14 +217,12 @@ class Home extends StatelessWidget {
                           children: [
                             Row(
                               children: [
-                                Text(
-                                  "Vai dividir o valor total entre amigos?",
-                                  style: TextStyle(
-                                    fontFamily: "Amaranth",
-                                    fontSize: 14.sp,
-                                    fontStyle: FontStyle.normal,
-                                  ),
-                                )
+                                Texto(
+                                  text: "Vai dividir o valor total entre"
+                                      " amigos?",
+                                  txtSize: 14,
+                                  fontWeight: FontWeight.normal,
+                                ),
                               ],
                             ),
                             SizedBox(
@@ -239,22 +232,16 @@ class Home extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 RadioButton(value: 1, valuegroup: 1),
-                                Text(
-                                  "Sim",
-                                  style: TextStyle(
-                                    fontFamily: "Amaranth",
-                                    fontSize: 14.sp,
-                                    fontStyle: FontStyle.normal,
-                                  ),
+                                Texto(
+                                  text: "Sim",
+                                  txtSize: 14,
+                                  fontWeight: FontWeight.normal,
                                 ),
                                 RadioButton(value: 2, valuegroup: 2),
-                                Text(
-                                  "Não",
-                                  style: TextStyle(
-                                    fontFamily: "Amaranth",
-                                    fontSize: 14.sp,
-                                    fontStyle: FontStyle.normal,
-                                  ),
+                                Texto(
+                                  text: "Não",
+                                  txtSize: 14,
+                                  fontWeight: FontWeight.normal,
                                 ),
                                 SizedBox(
                                   width: 10.w,
@@ -298,13 +285,11 @@ class Home extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          Text(
-                            "Resultado",
-                            style: GoogleFonts.amaranth(
-                              fontSize: 20.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )
+                          Texto(
+                            text: "Resultado",
+                            txtSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ],
                       ),
                       SizedBox(
@@ -317,26 +302,23 @@ class Home extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  "Valor total",
-                                  style: TextStyle(
-                                    fontFamily: "Amaranth",
-                                    fontSize: 14.sp,
-                                    fontStyle: FontStyle.normal,
-                                  ),
+                                Texto(
+                                  text: "Valor total",
+                                  txtSize: 14,
+                                  fontWeight: FontWeight.normal,
                                 ),
                                 Container(
                                   child: Center(
-                                    child: Obx(() {
-                                      return Text(
-                                        "R\$ ${_homeController.valorTotal}",
-                                        style: TextStyle(
-                                          fontFamily: "Amaranth",
-                                          fontSize: 14.sp,
-                                          fontStyle: FontStyle.normal,
-                                        ),
-                                      );
-                                    }),
+                                    child: Obx(
+                                      () {
+                                        return Texto(
+                                          text: "R\$ "
+                                              "${_homeController.valorTotal}",
+                                          txtSize: 14,
+                                          fontWeight: FontWeight.normal,
+                                        );
+                                      },
+                                    ),
                                   ),
                                 )
                               ],
@@ -344,46 +326,43 @@ class Home extends StatelessWidget {
                             SizedBox(
                               height: 1.h,
                             ),
-                            Obx(() {
-                              return AnimatedOpacity(
-                                //TODO implementar logica {se value for igual 1(sim) fica visivel }
-                                // visible: _homeController.valueGroup.value == 2
-                                //     ? false
-                                //     : true,
-                                duration: const Duration(milliseconds: 300),
-                                opacity: _homeController.valueGroup.value == 2
-                                    ? 0.0
-                                    : 1.0,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "Valor dividido para cada amigo",
-                                      style: TextStyle(
-                                        fontFamily: "Amaranth",
-                                        fontSize: 14.sp,
-                                        fontStyle: FontStyle.normal,
+                            Obx(
+                              () {
+                                return AnimatedOpacity(
+                                  //TODO implementar logica {se value for igual 1(sim) fica visivel }
+                                  duration: const Duration(milliseconds: 300),
+                                  opacity: _homeController.valueGroup.value == 2
+                                      ? 0.0
+                                      : 1.0,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Texto(
+                                        text: "Valor dividido para cada "
+                                            "amigo",
+                                        txtSize: 14,
+                                        fontWeight: FontWeight.normal,
                                       ),
-                                    ),
-                                    Container(
-                                      child: Center(
-                                        child: Obx(() {
-                                          return Text(
-                                            "R\$ ${_homeController.valorTotalPessoa}",
-                                            style: TextStyle(
-                                              fontFamily: "Amaranth",
-                                              fontSize: 14.sp,
-                                              fontStyle: FontStyle.normal,
-                                            ),
-                                          );
-                                        }),
-                                      ),
-                                    )
-                                  ],
-                                ),
-                              );
-                            })
+                                      Container(
+                                        child: Center(
+                                          child: Obx(
+                                            () {
+                                              return Texto(
+                                                text:
+                                                    "R\$ ${_homeController.valorTotalPessoa}",
+                                                txtSize: 14,
+                                                fontWeight: FontWeight.normal,
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                );
+                              },
+                            )
                           ],
                         ),
                       ),
@@ -395,13 +374,10 @@ class Home extends StatelessWidget {
                         style: ElevatedButton.styleFrom(
                           primary: Colors.amber,
                         ),
-                        child: Text(
-                          "Compartilhar",
-                          style: TextStyle(
-                            fontFamily: "Amaranth",
-                            fontSize: 14.sp,
-                            fontStyle: FontStyle.normal,
-                          ),
+                        child: Texto(
+                          text: "Compartilhar",
+                          txtSize: 14,
+                          fontWeight: FontWeight.normal,
                         ),
                       ),
                     ],

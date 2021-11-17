@@ -35,7 +35,6 @@ class TextFieldCustom extends StatelessWidget {
         inputFormatters: [
           LengthLimitingTextInputFormatter(5),
           FilteringTextInputFormatter.allow(RegExp('[0-9.]+')),
-          // FilteringTextInputFormatter.digitsOnly,
         ],
         decoration: InputDecoration(
           filled: true,
@@ -63,26 +62,30 @@ class TextFieldCustom extends StatelessWidget {
             ),
           ),
           labelText: labelTxt,
-          labelStyle: GoogleFonts.amaranth(
+          labelStyle: TextStyle(
             color: Colors.black,
+            fontFamily: "Amaranth",
             fontSize: 11.sp,
             fontWeight: FontWeight.normal,
           ),
           prefixText: prefixTxt,
-          prefixStyle: GoogleFonts.amaranth(
+          prefixStyle: TextStyle(
             color: Colors.black,
+            fontFamily: "Amaranth",
             fontSize: 11.sp,
             fontWeight: FontWeight.normal,
           ),
           helperText: helperTxt,
-          helperStyle: GoogleFonts.amaranth(
+          helperStyle: TextStyle(
             color: Colors.black,
+            fontFamily: "Amaranth",
             fontSize: 9.sp,
             fontWeight: FontWeight.normal,
           ),
         ),
-        style: GoogleFonts.amaranth(
+        style: TextStyle(
           color: Colors.black,
+          fontFamily: "Amaranth",
           fontSize: 11.sp,
           fontWeight: FontWeight.normal,
         ),

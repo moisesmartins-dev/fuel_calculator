@@ -2,10 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  FocusNode distanciaFocusNode = FocusNode();
-  FocusNode consumoFocusNode = FocusNode();
-  FocusNode quantidadeFocusNode = FocusNode();
-  FocusNode precoFocusNode = FocusNode();
 
   TextEditingController distanciaController = TextEditingController();
   TextEditingController consumoController = TextEditingController();
@@ -20,6 +16,17 @@ class HomeController extends GetxController {
   void onClickRadioButton(value) {
     valueGroup.value = value;
     update();
+  }
+
+  limparValores() {
+    distanciaController.clear();
+    consumoController.clear();
+    quantidadeController.clear();
+    precoController.clear();
+    pessoasController.clear();
+    valorTotal?.value = "0";
+    valorTotalPessoa?.value = "0";
+    valueGroup.value = 2;
   }
 
   calculoCombustivel() {
@@ -46,12 +53,5 @@ class HomeController extends GetxController {
     double quantidade;
     quantidade = distancia / consumo;
     return quantidade.toStringAsFixed(2);
-  }
-
-  teste() {
-    // calculoQuantidade();
-    String testee = calculoCombustivelPorPessoa();
-    print(testee);
-    return testee;
   }
 }

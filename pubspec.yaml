@@ -59,10 +59,17 @@ flutter:
   fonts:
     - family: Amaranth
       fonts:
-        - asset: asset/fonts/Amaranth-Bold.ttf
-        - asset: asset/fonts/Amaranth-BoldItalic.ttf
         - asset: asset/fonts/Amaranth-Italic.ttf
         - asset: asset/fonts/Amaranth-Regular.ttf
+        - asset: asset/fonts/Amaranth-Bold.ttf
+        - asset: asset/fonts/Amaranth-BoldItalic.ttf
+#
+#          style: normal
+#    - family: Amaranth
+#      fonts:
+#        - asset: asset/fonts/Amaranth-Bold.ttf
+#        - asset: asset/fonts/Amaranth-BoldItalic.ttf
+#          style: bold
 #
 
   # The following line ensures that the Material Icons fonts is
